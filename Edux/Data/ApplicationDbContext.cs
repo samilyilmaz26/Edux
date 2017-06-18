@@ -14,6 +14,15 @@ namespace Edux.Data
             : base(options)
         {
         }
+        public DbSet<Entity> Entities { get; set; }
+        public DbSet<Property> Properties { get; set; }
+        public DbSet<PropertyValue> PropertyValues { get; set; }
+        public DbSet<ComponentType> ComponentTypes { get; set; }
+        public DbSet<Page> Pages { get; set; }
+        public DbSet<ParameterValue> ParameterValues { get; set; }
+        public DbSet<Parameter> Parameters { get; set; }
+        public DbSet<Component> Components { get; set; }
+        public DbSet<PageComponent> PageComponents { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

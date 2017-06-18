@@ -1,0 +1,164 @@
+@model Edux.Models.Page
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = null;
+}
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+    <h4 class="modal-title">Yeni Sayfa</h4>
+</div>
+<form asp-action="Create">
+    <div class="modal-body">
+        <div class="scroller" style="height:300px" data-always-visible="1" data-rail-visible1="1">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-6">
+
+
+
+                    <div class="form-horizontal">
+                     
+                        
+                        <div class="form-group">
+                            <label asp-for="Title" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="Title" class="form-control" />
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Slug" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="Slug" class="form-control" />
+                                <span asp-validation-for="Slug" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="View" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="View" class="form-control" />
+                                <span asp-validation-for="View" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LayoutView" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="LayoutView" class="form-control" />
+                                <span asp-validation-for="LayoutView" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ParentPageId" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <select asp-for="ParentPageId" class="form-control" asp-items="ViewBag.ParentPageId"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="MetaTitle" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="MetaTitle" class="form-control" />
+                                <span asp-validation-for="MetaTitle" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="MetaDescription" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="MetaDescription" class="form-control" />
+                                <span asp-validation-for="MetaDescription" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="MetaKeywords" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="MetaKeywords" class="form-control" />
+                                <span asp-validation-for="MetaKeywords" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <div class="checkbox">
+                                    <input asp-for="IsPublished" />
+                                    <label asp-for="IsPublished"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ViewCount" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="ViewCount" class="form-control" />
+                                <span asp-validation-for="ViewCount" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Position" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="Position" class="form-control" />
+                                <span asp-validation-for="Position" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AllowedRoles" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="AllowedRoles" class="form-control" />
+                                <span asp-validation-for="AllowedRoles" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CreateDate" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="CreateDate" class="form-control" />
+                                <span asp-validation-for="CreateDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CreatedBy" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="CreatedBy" class="form-control" />
+                                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="UpdateDate" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="UpdateDate" class="form-control" />
+                                <span asp-validation-for="UpdateDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="UpdatedBy" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="UpdatedBy" class="form-control" />
+                                <span asp-validation-for="UpdatedBy" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AppTenantId" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="AppTenantId" class="form-control" />
+                                <span asp-validation-for="AppTenantId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                </div>
+            </div>
+        </div>
+    
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn dark btn-outline">Kapat</button>
+                    <input type="submit" value="Oluþtur" class="btn green" />
+
+                </div>
+
+</form>
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }
