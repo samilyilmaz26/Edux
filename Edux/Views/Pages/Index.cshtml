@@ -2,31 +2,14 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_metronicLayout.cshtml";
 }
-
-<!-- END PAGE BAR -->
-<!-- BEGIN PAGE TITLE-->
-<h1 class="page-title"> Admin Dashboard
-    <small>statistics, charts, recent events and reports</small>
-</h1>
-<!-- END PAGE TITLE-->
-<!-- END PAGE HEADER-->
 
 <h2>Index</h2>
 
 <p>
-    <a data-toggle="modal" data-target="#createPage" asp-action="Create">Create New</a>
+    <a asp-action="Create">Create New</a>
 </p>
-<div class="modal fade draggable-modal" id="createPage" tabindex="-1" role="basic" aria-hidden="true">
-   
-            <div class="modal-dialog modal-full">
-                <div class="modal-content">
-                    <!-- Content will be loaded here from "Create" action -->
-                </div>
-            </div>
-      
-    <!-- /.modal-dialog -->
-</div>
 <table class="table">
     <thead>
         <tr>
