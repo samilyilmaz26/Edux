@@ -4,62 +4,75 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_metronicLayout.cshtml";
 }
-
-<h2>Index</h2>
-
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Yeni Sayfa Olustur</a>
 </p>
 <table id="tblRecords" class="table" style="display: block; overflow-x: auto;">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @*@Html.DisplayNameFor(model => model.Title)*@
+                Baslik
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Slug)
+                @*@Html.DisplayNameFor(model => model.Slug)*@
+                Slug
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.View)
+                @*@Html.DisplayNameFor(model => model.View)*@
+                Gorunum
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LayoutView)
+                @*@Html.DisplayNameFor(model => model.LayoutView)*@
+                Gorunum Duzeni
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MetaTitle)
+                @*@Html.DisplayNameFor(model => model.MetaTitle)*@
+                MetaBaslik
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MetaDescription)
+                @*@Html.DisplayNameFor(model => model.MetaDescription)*@
+                MetaAciklama
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MetaKeywords)
+                @*@Html.DisplayNameFor(model => model.MetaKeywords)*@
+                Meta Anahtar Kelimeler
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsPublished)
+                @*@Html.DisplayNameFor(model => model.IsPublished)*@
+                Yayinlandi Mi?
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ViewCount)
+                @*@Html.DisplayNameFor(model => model.ViewCount)*@
+                Goruntulenme Sayisi
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Position)
+                @*@Html.DisplayNameFor(model => model.Position)*@
+                Pozisyon
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AllowedRoles)
+                @*@Html.DisplayNameFor(model => model.AllowedRoles)*@
+                Izin Verilen Roller
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreateDate)
+                @*@Html.DisplayNameFor(model => model.CreateDate)*@
+                Olusturulma Tarihi
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreatedBy)
+                @*@Html.DisplayNameFor(model => model.CreatedBy)*@
+                Olusturan
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UpdateDate)
+                @*@Html.DisplayNameFor(model => model.UpdateDate)*@
+                Duzenleme Tarihi
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UpdatedBy)
+                @*@Html.DisplayNameFor(model => model.UpdatedBy)*@
+                Duzenleyen
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ParentPage)
+                @*@Html.DisplayNameFor(model => model.ParentPage)*@
+                Anasayfa
             </th>
             <th></th>
         </tr>
@@ -117,9 +130,9 @@
                     @Html.DisplayFor(modelItem => item.ParentPage.Id)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Duzenle</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Detaylar</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Sil</a>
                 </td>
             </tr>
         }
