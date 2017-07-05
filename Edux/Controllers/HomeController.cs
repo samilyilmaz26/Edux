@@ -28,7 +28,7 @@ namespace Edux.Controllers
                 var page = _context.Pages.FirstOrDefault(x => x.Slug.ToLower().Equals(slugLower));
                 if (page == null)
                 {
-                    return Content($"'{slug}' isimli sayfa bulunamadi!");
+                    return Content($"'{slug}' Isimli Sayfa Bulunamadi!");
                 }
                 else
                 {
