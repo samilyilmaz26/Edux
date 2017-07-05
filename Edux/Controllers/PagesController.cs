@@ -102,6 +102,8 @@ namespace Edux.Controllers
             {
                 try
                 {
+                    page.UpdateDate = DateTime.Now;
+                    page.UpdatedBy = "username";
                     _context.Update(page);
                     await _context.SaveChangesAsync();
                 }

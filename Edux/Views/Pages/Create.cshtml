@@ -43,7 +43,9 @@
         <div class="form-group">
             <label asp-for="ParentPageId" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="ParentPageId" class ="form-control" asp-items="ViewBag.ParentPageId"></select>
+                <select asp-for="ParentPageId" class ="form-control" asp-items="ViewBag.ParentPageId">
+                    <option value="">Seciniz</option>
+                </select>
             </div>
         </div>
         <div class="form-group">
