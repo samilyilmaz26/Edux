@@ -16,7 +16,7 @@ namespace Edux.Controllers
 
         public PagesController(ApplicationDbContext context)
         {
-            _context = context;    
+            _context = context;
         }
 
         // GET: Pages
