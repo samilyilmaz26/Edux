@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Edux.Data;
 using Edux.Models;
 using Edux.Services;
+using Microsoft.AspNetCore.Routing.Constraints;
 
 namespace Edux
 {
@@ -81,6 +82,14 @@ namespace Edux
             {
                 routes.MapRoute(name: "areaRoute",
                     template: "{area:exists}/{controller=Dashboard}/{action=Index}");
+                routes.MapRoute(
+                    name: "cultureRoute",
+                    template: "tr/{*slug}",
+                    defaults: new { controller = "Home", action = "Index", culture = "no", slug = "anasayfa" },
+                    constraints: new
+                    {
+                        culture = new RegexRouteConstraint("^[a-z]{2}(?:-[A-Z]{2})?$")
+                    });
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
