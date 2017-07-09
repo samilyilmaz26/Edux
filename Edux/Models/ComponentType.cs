@@ -11,8 +11,6 @@ namespace Edux.Models
         public ComponentType() : base()
         {
             Parameters = new HashSet<Parameter>();
-            CreateDate = DateTime.Now;
-            CreatedBy = "username";
             UpdateDate = DateTime.Now;
             UpdatedBy = "username";
         }

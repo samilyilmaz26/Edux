@@ -1,0 +1,20 @@
+@model Edux.Models.ComponentViewModel
+    
+    @{
+        Layout = null;
+    }
+
+<table class="table table-responsive">
+        @foreach (var parameter in Model.Parameters)
+        {
+            <tr>
+                <td>@parameter.DisplayName @(parameter.IsRequired ? "*")</td>
+                <td>
+                    <input type="text" id="@("input"+parameter.Id)"/>
+                </td>
+                <td>
+                    <button class="btn btn-success" id="@("btn"+parameter.Id)" onclick="addParameterValue(@parameter.Id, @Model.PageID)">Add</button>
+                </td>
+            </tr>
+        }
+    </table>

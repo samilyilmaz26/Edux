@@ -11,10 +11,7 @@ namespace Edux.Models
     {
         public Parameter() : base()
         {
-            CreateDate = DateTime.Now;
-            CreatedBy = "username";
             UpdateDate = DateTime.Now;
-            UpdatedBy = "username";
         }
         [StringLength(200)]
         public string Name { get; set; }
@@ -25,5 +22,7 @@ namespace Edux.Models
         [ForeignKey("ComponentTypeId")]
         public ComponentType ComponentType { get; set; }
         public int Position { get; set; }
+        public virtual ICollection<ParameterValue> ParameterValues { get; set; }
+
     }
 }

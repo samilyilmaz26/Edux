@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Edux.Data;
 using Microsoft.AspNetCore.Mvc;
+using Edux.Models.PageViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace Edux.Controllers
 {
@@ -16,23 +19,39 @@ namespace Edux.Controllers
             _context = context;
         }
 
-        public IActionResult Index(string slug)
+        public async Task<IActionResult> Index(string slug)
         {
             if (slug == null)
             {
-                return View();
+                return RedirectToAction("Index", "Pages");
             }
             else
             {
-                string slugLower = slug.ToLower();
-                var page = _context.Pages.FirstOrDefault(x => x.Slug.ToLower().Equals(slugLower));
+                var model = new DisplayViewModel();
+
+                // Getting the page with the slug that user entered
+                var page = await _context.Pages
+                    .Include(p => p.ParentPage)
+                    .Include(p => p.PageComponents)
+                        .ThenInclude(pc => pc.Component)
+                            .ThenInclude(x => x.ParameterValues)
+                                .ThenInclude(x => x.Parameter)
+                    .SingleOrDefaultAsync(m => m.Slug.Equals(slug.ToLower()) && m.IsPublished == true);
+                model.IsFromHome = true;
+
                 if (page == null)
                 {
                     return Content($"'{slug}' Isimli Sayfa Bulunamadi!");
                 }
                 else
                 {
-                    return View(page.View);
+                    // Incrementing the ViewCount
+                    page.ViewCount++;
+                    _context.SaveChanges();
+                    model.Page = page;
+                    ViewData["ComponentTypeId"] = new SelectList(_context.ComponentTypes, "Id", "DisplayName");
+                    ViewData["ParentComponentId"] = new SelectList(_context.Components, "Id", "DisplayName");
+                    return View("/Views/Shared/BaseView.cshtml", model);
                 }
             }
         }

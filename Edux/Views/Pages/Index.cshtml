@@ -1,11 +1,11 @@
-@model IEnumerable<Edux.Models.Page>
+﻿@model IEnumerable<Edux.Models.Page>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_metronicLayout.cshtml";
 }
 <p>
-    <a asp-action="Create">Yeni Sayfa Olustur</a>
+    <a asp-action="Create">Yeni Sayfa Oluştur</a>
 </p>
 <table id="tblRecords" class="table" style="display: block; overflow-x: auto;">
     <thead>
@@ -132,7 +132,8 @@
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Duzenle</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">Detaylar</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Sil</a> |
+                    <a asp-action="Display" asp-route-id="@item.Id">Goruntule</a>
                 </td>
             </tr>
         }

@@ -1,0 +1,226 @@
+@model Edux.Models.PageViewModels.DisplayViewModel
+@{
+    ViewData["Title"] = Model.Page.Title;
+    Layout = $"~/Views/Shared/{Model.Page.LayoutView}.cshtml";
+}
+
+@if (!Model.IsFromHome)
+{
+    <div class="col-lg-12">
+        <div class="pull-right">
+            <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#compAddModal">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+}
+
+<div class="row">
+    @foreach (var pc in Model.Page.PageComponents)
+    {
+
+        <div class="col-md-4 ">
+            <!-- BEGIN Portlet PORTLET-->
+            <div class="portlet box blue-hoki">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>@pc.Component.DisplayName
+                        @if (!Model.IsFromHome)
+                        {
+                            <button class="btn btn-danger" onclick="deleteComponent(@pc.Component.Id)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        }
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="scroller" style="height: 200px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">
+                        @await Component.InvokeAsync("DataGrid", new { parameterValues = pc.Component.ParameterValues.ToList() })
+                    </div>
+                </div>
+            </div>
+            <!-- END Portlet PORTLET-->
+        </div>
+    }
+</div>
+
+<!-- Modal -->
+<div id="compAddModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Component</h4>
+            </div>
+            <div class="modal-body">
+                <form id="addForm">
+                    <input type="hidden" name="pageID" value="@Model.Page.Id" />
+                    <table class="table table-responsive">
+                        <tr>
+                            <td>
+                                Name
+                            </td>
+                            <td>
+                                <input name="Name" class="form-control" />
+                                <span asp-validation-for="Component.Name" class="text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                DisplayName
+                            </td>
+                            <td>
+                                <input name="DisplayName" class="form-control" />
+                                <span asp-validation-for="Component.DisplayName" class="text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                ComponentTypeId
+                            </td>
+                            <td>
+                                <select name="ComponentTypeId" class="form-control" asp-items="ViewBag.ComponentTypeId">
+                                    <option value="">Seciniz</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                View
+                            </td>
+                            <td>
+                                <input name="View" class="form-control" />
+                                <span asp-validation-for="Component.View" class="text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                ParentComponentId
+                            </td>
+                            <td>
+                                <select name="ParentComponentId" class="form-control" asp-items="ViewBag.ParentComponentId">
+                                    <option value="">Seçiniz</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input type="button" value="Create" class="btn btn-default" id="addButton" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<div id="parameterModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">parameterModal</h4>
+            </div>
+            <div class="modal-body" id="parameterModalBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="btnClose">Close</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+
+    var compId = 0;
+
+    function deleteComponent(id) {
+        $.ajax({
+            url: '/Components/DeleteService/',
+            type: 'post',
+            data: {id: id},
+            success: function (response) {
+                if (response === "true") {
+
+                }
+                window.location.reload(true);
+            }
+        });
+    }
+
+    function addParameterValue(inputID, pageID) {
+        $.ajax({
+            url: '/Parameters/CreateParameterValue',
+            type: 'post',
+            dataType: 'json',
+            data: { ComponentId: compId, ParameterId: inputID, Value: $("#input" + inputID).val() },
+            success: function (response) {
+                if (response === "true") {
+                $("#input" + inputID).prop('disabled', true);
+                $("#btn" + inputID).prop('disabled', true);
+                }
+            }
+        });
+    }
+
+    $("#btnClose").click(function () {
+        window.location.reload(true);
+    })
+
+    $('#addButton').click(function () {
+        // Transforming Form Datas to JSON
+        var formdata = $("#addForm").serializeArray();
+        var data = {};
+        $(formdata).each(function (index, obj) {
+            data[obj.name] = obj.value;
+        });
+
+        // Checking if user inputs of Component fields are valid
+        // If it's valid, Create the Component and display the parameter modal.
+        // If it's not valid, alert user with the message that returned from service
+        $.ajax({
+            url: '/Components/ValidateComponent',
+            type: 'post',
+            dataType: 'json',
+            data: data,
+            success: function (response) {
+                if (response.code === 200) {
+
+                    $.ajax({
+                        url: '/Components/CreateService',
+                        type: 'post',
+                        dataType: 'json',
+                        data: data,
+                        success: function (componentID) {
+
+                            if ($.isNumeric(componentID)) {
+                                $.ajax({
+                                    url: '/Components/GetHtmlForParamValues/'+componentID,
+                                    type: 'post',
+                                    data: { componentID: componentID, pageID: @Model.Page.Id },
+                                    success: function (response2) {
+                                        compId = componentID;
+                                        $('#parameterModalBody').html(response2);
+                                        $('#parameterModal').modal('show');
+                                    }
+                                });
+                            }
+
+                        }
+                    });
+
+
+                } else {
+                    alert(response.message);
+                }
+            }
+        });
+    });
+</script>

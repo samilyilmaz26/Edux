@@ -1,0 +1,62 @@
+@model Edux.Models.Component
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_metronicLayout.cshtml";
+}
+
+<h2>Create</h2>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>Component</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Name" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="DisplayName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="DisplayName" class="form-control" />
+                <span asp-validation-for="DisplayName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ComponentTypeId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="ComponentTypeId" class ="form-control" asp-items="ViewBag.ComponentTypeId"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="View" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="View" class="form-control" />
+                <span asp-validation-for="View" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ParentComponentId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="ParentComponentId" class="form-control" asp-items="ViewBag.ParentComponentId">
+                    <option value="">--Seciniz--</option>
+                </select>
+            </div>
+        </div>
+        <input type="hidden" name="pageID" value="3" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

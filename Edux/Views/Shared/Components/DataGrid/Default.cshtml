@@ -1,0 +1,6 @@
+@model List<Edux.Models.ParameterValue>
+
+@foreach (var parameterValue in Model)
+{
+    <span>( @parameterValue.Id ) @parameterValue.Parameter.DisplayName ; @parameterValue.Value <br /> </span>
+}

@@ -13,10 +13,7 @@ namespace Edux.Models
         {
             ParameterValues = new HashSet<ParameterValue>();
             View = "Default";
-            CreateDate = DateTime.Now;
-            CreatedBy = "username";
             UpdateDate = DateTime.Now;
-            UpdatedBy = "username";
         }
         [StringLength(200)]
         public string Name { get; set; }
